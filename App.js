@@ -1,11 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import TaskList from './TaskList';
 
 export default class App extends React.Component {
+  state = {
+    todos: [
+      {
+        task: 'Learn React Native'
+      }
+    ]
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <TaskList  />
       </View>
     );
   }
