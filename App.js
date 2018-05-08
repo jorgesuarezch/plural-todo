@@ -8,6 +8,7 @@ import {
   Navigator // TODO: update deprecated component see https://facebook.github.io/react-native/docs/navigation.html
 } from 'react-native-deprecated-custom-components';
 import TaskList from './TaskList';
+import TaskForm from './TaskForm';
 
 export default class App extends React.Component {
   constructor(props, context) {
@@ -34,13 +35,7 @@ export default class App extends React.Component {
     switch (route.name) {
       case 'taskform': {
         return (
-          <Text
-            style={{
-              paddingTop: 20
-            }}
-          >
-            Here goes the task form!
-           </Text>
+          <TaskForm />
         );
       }
       default:
