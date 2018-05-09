@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  Text,
   View
 } from 'react-native';
 import {
@@ -31,11 +30,26 @@ export default class App extends React.Component {
     });
   }
 
+  onCancel() {
+    this.nav.pop();
+  }
+
+  onAdd(task) {
+    this.state.todos.push({task});
+    this.setState({
+      todos: this.state.todos
+    });
+    this.nav.pop();
+  }
+
   renderScene(route, nav) {
     switch (route.name) {
       case 'taskform': {
         return (
-          <TaskForm />
+          <TaskForm
+            onCancel={this.onCancel.bind(this)}
+            onAdd={this.onAdd.bind(this)}
+          />
         );
       }
       default:

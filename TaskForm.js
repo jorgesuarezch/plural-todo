@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   StyleSheet,
@@ -52,19 +53,41 @@ class TaskForm extends React.Component {
     };
   }
 
+  onChangeText(text) {
+    this.task = text;
+  }
+
+  onAddPressed() {
+    this.props.onAdd(this.task);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <TextInput style={styles.input} />
-        <TouchableHighlight style={styles.button}>
+        <TextInput
+          style={styles.input}
+          onChangeText={this.onChangeText.bind(this)}
+        />
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.onAddPressed.bind(this)}
+        >
           <Text style={styles.buttonText}>Add</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={[styles.button, styles.cancelButton]}>
+        <TouchableHighlight
+          style={[styles.button, styles.cancelButton]}
+          onPress={this.props.onCancel}
+        >
           <Text style={styles.buttonText}>Cancel</Text>
         </TouchableHighlight>
       </View>
     );
   }
+}
+
+TaskForm.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
 }
 
 export default TaskForm;
