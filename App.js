@@ -35,11 +35,18 @@ export default class App extends React.Component {
   }
 
   onAdd(task) {
-    this.state.todos.push({task});
+    this.state.todos.push({ task });
     this.setState({
       todos: this.state.todos
     });
     this.nav.pop();
+  }
+
+  onDone(todo) {
+    const filteredTodos = this.state.todos.filter((filterTodo) => filterTodo !== todo);
+    this.setState({
+      todos: filteredTodos,
+    })
   }
 
   renderScene(route, nav) {
@@ -56,6 +63,7 @@ export default class App extends React.Component {
         return (
           <TaskList
             onAddStarted={this.onAddStarted.bind(this)}
+            onDone={this.onDone.bind(this)}
             todos={this.state.todos}
           />
         );

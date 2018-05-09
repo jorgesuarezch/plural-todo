@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } from 'react-native';
 
@@ -22,20 +23,35 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 20,
     fontWeight: '300',
+  },
+  buttonDone: {
+    borderRadius: 5,
+    backgroundColor: '#EAEAEA',
+    padding: 5,
   }
 });
 
 class TaskRow extends React.Component {
+  onDonePressed() {
+    this.props.onDone(this.props.todo);
+  }
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.label}>{this.props.todo.task}</Text>
+        <TouchableHighlight
+          onPress={this.onDonePressed.bind(this)}
+          style={styles.buttonDone}
+        >
+          <Text>Done</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
 
 TaskRow.propTypes = {
+  onDone: PropTypes.func.isRequired,
   todo: PropTypes.shape({
     task: PropTypes.string.isRequired,
   }).isRequired,
